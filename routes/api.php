@@ -19,7 +19,10 @@ Route::middleware(['auth:sanctum'])
         Route::apiResource('/program-pilihan', ProgramPilihanController::class);
         Route::post('/program-pilihan/add', [ProgramPilihanController::class, 'store']);
         Route::get('/program-pilihan/edit/{id}', [ProgramPilihanController::class, 'edit']);
+        Route::post('/program-pilihan/edit/{id}', [ProgramPilihanController::class, 'update']);
 
         Route::apiResource('/siswa', SiswaController::class);
         Route::post('/siswa/add', [SiswaController::class, 'store']);
+        Route::get('/siswa/edit/{id}', [SiswaController::class, 'edit']);
+        Route::post('/siswa/edit/{id}', [SiswaController::class, 'update']);
     });

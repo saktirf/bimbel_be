@@ -25,14 +25,6 @@ class SiswaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -73,19 +65,11 @@ class SiswaController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+      return Siswa::find($id);
     }
 
     /**
@@ -93,7 +77,40 @@ class SiswaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+      $request->validate([
+        'nama'          => ['required', 'string'],
+        'tempatlahir'   => ['required', 'string'],
+        'tanggallahir'  => ['required'],
+        'asalsekolah'   => ['required', 'string'],
+        'kelas'         => ['required', 'string'],
+        'jeniskelamin'  => ['string'],
+        'alamat'        => ['string'],
+        'nohp'          => ['string'],
+        'tempat_les'    => ['required', 'string'],
+        'pilihanprogram'=> ['required', 'string'],
+        'tglpendaftaran'=> ['required'],
+        'status_siswa'  => ['required', 'string'],
+        'keterangan'    => ['string'],
+      ]);
+
+      $programPilihan = Siswa::where('id_siswa', $id)
+        ->update([
+          'nama'          => $request->nama,
+          'tempatlahir'   => $request->tempatlahir,
+          'tanggallahir'  => $request->tanggallahir,
+          'asalsekolah'   => $request->asalsekolah,
+          'kelas'         => $request->kelas,
+          'jeniskelamin'  => $request->jeniskelamin,
+          'alamat'        => $request->alamat,
+          'nohp'          => $request->nohp,
+          'tempat_les'    => $request->tempat_les,
+          'pilihanprogram'=> $request->pilihanprogram,
+          'tglpendaftaran'=> $request->tglpendaftaran,
+          'status_siswa'  => $request->status_siswa,
+          'keterangan'    => $request->keterangan,
+        ]);
+
+      return response($programPilihan, 201);
     }
 
     /**

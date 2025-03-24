@@ -41,14 +41,6 @@ class ProgramPilihanController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -61,7 +53,18 @@ class ProgramPilihanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'pilihanprogram' => ['required', 'string'],
+            'biayaprogram'   => ['required', 'integer'],
+        ]);
+
+        $programPilihan = ProgramPilihan::where('id_programpilihan', $id)
+          ->update([
+            'pilihanprogram' => $request->pilihanprogram,
+            'biayaprogram'   => $request->biayaprogram,
+          ]);
+
+        return response($programPilihan, 201);
     }
 
     /**
