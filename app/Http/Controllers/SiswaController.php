@@ -12,7 +12,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        return Siswa::orderBy('id_siswa', 'desc')->get()
+        return Siswa::where('status_siswa', 'Aktif')->orderBy('id_siswa', 'desc')->get()
             ->map(function($siswa) {
                 return [
                     'id'          => $siswa->id_siswa,
